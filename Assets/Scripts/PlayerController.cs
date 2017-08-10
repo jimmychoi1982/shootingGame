@@ -23,6 +23,7 @@ public class PlayerController : MonoBehaviour
         Vector2 direction = new Vector2(x, y).normalized;
 
         // 移動の制限
-        move.Execute(direction);
+        if(move != null)
+            move.Execute(direction);
     }
 }
