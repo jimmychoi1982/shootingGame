@@ -6,7 +6,7 @@ using UnityEngine;
 
 public class MotionBase : MonoBehaviour
 {
-    private AirplaneBase airPlaneBase;
+    protected AirplaneBase airPlaneBase;
 
     public AirplaneBase AirPlaneBase
     {

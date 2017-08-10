@@ -6,12 +6,9 @@ using UnityEngine;
 
 public class Move : MotionBase
 {
-    private float moveSpeed;
-
-    public float MoveSpeed
+    public Move(AirplaneBase target)
     {
-        get { return moveSpeed; }
-        set { moveSpeed = value; }
+        airPlaneBase = target;
     }
 
     public override void Execute(Vector2 direction)
@@ -28,13 +25,13 @@ public class Move : MotionBase
         Vector2 pos = transform.position;
 
         // 移動量を加える
-        pos += direction * moveSpeed * Time.deltaTime;
+        pos += direction * ((PlayerAirplane)AirPlaneBase).speed * Time.deltaTime;
 
         // プレイヤーの位置が画面内に収まるように制限をかける
         pos.x = Mathf.Clamp(pos.x, min.x, max.x);
         pos.y = Mathf.Clamp(pos.y, min.y, max.y);
 
         // 制限をかけた値をプレイヤーの位置とする
-        transform.position = pos;
+        airPlaneBase.transform.position = pos;
     }
 }
