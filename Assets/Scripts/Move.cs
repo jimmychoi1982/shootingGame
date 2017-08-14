@@ -22,7 +22,7 @@ public class Move : MotionBase
         Vector2 max = Camera.main.ViewportToWorldPoint(new Vector2(1, 1));
 
         // プレイヤーの座標を取得
-        Vector2 pos = transform.position;
+        Vector2 pos = airPlaneBase.transform.position;
 
         // 移動量を加える
         pos += direction * ((PlayerAirplane)AirPlaneBase).speed * Time.deltaTime;

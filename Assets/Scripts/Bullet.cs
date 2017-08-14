@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
+using com.jimmychoi.shootingGame.Weapon;
 
-public class Bullet : MonoBehaviour
+public class Bullet : WeaponBase
 {
 	// 弾の移動スピード
 	public int speed = 10;
@@ -10,14 +11,4 @@ public class Bullet : MonoBehaviour
 
 	// 攻撃力
 	public int power = 1;
-
-	void Start ()
-	{
-		// ローカル座標のY軸方向に移動する
-		//rigidbody2D.velocity = transform.up.normalized * speed;
-		GetComponent<Rigidbody2D>().velocity = transform.up.normalized * speed;
-
-        // lifeTime秒後に削除
-        Destroy (gameObject, lifeTime);
-	}
 }
