@@ -19,6 +19,8 @@ namespace com.jimmychoi.shootingGame.AttackSystem
             var go = weapon.bulletPool.Borrow();
             go.transform.position = new Vector2(airplaneBase.transform.position.x, airplaneBase.transform.position.y);
             go.GetComponent<Rigidbody2D>().velocity = go.transform.up.normalized * ((CommonBullet)weapon).speed;
+
+            StartCoroutine(returnBulletPool(go));
             returnBulletPool(go);
         }
 
@@ -26,6 +28,11 @@ namespace com.jimmychoi.shootingGame.AttackSystem
         {
             yield return new WaitForSeconds(((CommonBullet)weapon).lifeTime);
             weapon.bulletPool.Return(obj);
+        }
+
+        private void StartCoroutine(IEnumerator enumerator)
+        {
+            throw new NotImplementedException();
         }
     }
 }
