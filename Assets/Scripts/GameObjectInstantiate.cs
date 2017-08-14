@@ -2,7 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 
-namespace com.asobimo.eternal.ui.utility
+namespace com.jimmychoi.shootingGame.ui.utility
 {
     /// <summary>
     /// 簡易プレハブ製造機
@@ -23,10 +23,10 @@ namespace com.asobimo.eternal.ui.utility
         private GameObject m_createdInstance;
 
         // 通常変数
-        public GameObject Instance
-        {
+        public GameObject Instance 
+        { 
             get { return m_createdInstance; }
-            private set { m_createdInstance = value; }
+            private set { m_createdInstance = value; } 
         }
 
         // アクセサ
@@ -475,7 +475,7 @@ namespace com.asobimo.eternal.ui.utility
         public void InitializeForGame()
         {
             if (m_originalObject != null)
-                m_originalObject.SetActive(false);
+                m_originalObject.SetActive(false);            
 
             m_pool.Clear();
             if (m_clonedObject != null)
@@ -671,16 +671,13 @@ namespace com.asobimo.eternal.ui.utility
             m_activeList.Clear();
         }
     }
-    [System.Serializable]
-    public class PrefabManasablePool : BasicManasablePool<PrefabPool> { };
-    [System.Serializable]
-    public class CustomPrefabManasablePool : BasicManasablePool<CustomPrefabPool> { };
-    [System.Serializable]
-    public class CloneManasablePool : BasicManasablePool<ClonePool>
+    [System.Serializable] public class PrefabManasablePool       : BasicManasablePool<PrefabPool>{};
+    [System.Serializable] public class CustomPrefabManasablePool : BasicManasablePool<CustomPrefabPool> { };
+    [System.Serializable] public class CloneManasablePool        : BasicManasablePool<ClonePool>
     {
         public void InitializeForGame()
         {
-            if (Pool != null)
+            if(Pool != null)
                 Pool.InitializeForGame();
         }
     };
@@ -689,12 +686,12 @@ namespace com.asobimo.eternal.ui.utility
     #region  public class ManasablePool(Component)...
 
     [System.Serializable]
-    public class BasicManasablePool<Tpool, Tcomponent>
-        where Tpool : IGameObjectPool, new()
+    public class BasicManasablePool<Tpool, Tcomponent> 
+        where Tpool  : IGameObjectPool, new()
         where Tcomponent : Component
     {
         [SerializeField]
-        private Tpool m_pool = new Tpool();
+        private Tpool m_pool = new Tpool(); 
 
         [System.NonSerialized]
         private List<Tcomponent> m_activeList = new List<Tcomponent>();
@@ -735,7 +732,7 @@ namespace com.asobimo.eternal.ui.utility
         }
         public void ReturnAll()
         {
-            foreach (var i in m_activeList)
+            foreach(var i in m_activeList)
                 m_pool.Return(i.gameObject);
 
             m_activeList.Clear();
@@ -748,11 +745,10 @@ namespace com.asobimo.eternal.ui.utility
 
 #region Editor
 #if UNITY_EDITOR
-namespace com.asobimo.eternal
+namespace com.jimmychoi.shootingGame
 {
     using UnityEditor;
-    using com.asobimo.eternal.ui.utility;
-    using System.Collections.Generic;
+    using ui.utility;
 
     /// <summary>
     /// 簡易プレハブ製造機(インスペクタ表示制御用)
@@ -774,7 +770,7 @@ namespace com.asobimo.eternal
                 return;
 
             m_enumeratedAttr = new EnumeratedAttributeHelper(fieldInfo);
-            m_isInitialized = true;
+            m_isInitialized  = true;
         }
 
         /// <summary> インスペクタへ表示 </summary>
@@ -790,7 +786,7 @@ namespace com.asobimo.eternal
         public override float GetPropertyHeight(SerializedProperty property, GUIContent label)
         {
             PreSetup(property, label);
-            return OnGUIAndCalcHeight(Rect.zero, property, label, bDraw: false);
+            return OnGUIAndCalcHeight(Rect.zero, property, label, bDraw:false);
         }
 
         /// <summary> インスペクタへの表示と表示高さの計算 </summary>
@@ -800,7 +796,7 @@ namespace com.asobimo.eternal
             float totalHeight = 0;
 
             var labelArea = CalcLabelDrawArea(position, label);
-            totalHeight = labelArea.height;
+            totalHeight   = labelArea.height;
 
             EditorGUI.BeginProperty(position, label, property);
             label.text = m_enumeratedAttr.GiveViewName(property, defaultName: label.text);
@@ -839,17 +835,17 @@ namespace com.asobimo.eternal
 
             // ここからボタンの表示とか
             {
-                var leftArea = EditorGUI.IndentedRect(drawArea);
+                var leftArea   = EditorGUI.IndentedRect(drawArea);
                 leftArea.width = leftArea.width / 2;
 
-                var rightArea = new Rect(leftArea);
-                rightArea.x += leftArea.width;
+                var rightArea  = new Rect(leftArea);
+                rightArea.x   += leftArea.width;
 
-                var leftHaight = DrawButton("事前生成", ref leftArea, () => PreCreate(property), bDraw);
+                var leftHaight  = DrawButton("事前生成", ref leftArea, () => PreCreate(property), bDraw);
                 var rightHaight = DrawButton("破棄", ref rightArea, () => PreDestroy(property), bDraw);
 
                 totalHeight += Mathf.Max(leftHaight, rightHaight);
-                drawArea.y += Mathf.Max(leftHaight, rightHaight);
+                drawArea.y  += Mathf.Max(leftHaight, rightHaight);
             }
             return totalHeight;
         }
@@ -876,7 +872,7 @@ namespace com.asobimo.eternal
 
                 instanceProperty.serializedObject.ApplyModifiedProperties();
             }
-            catch (System.Exception e)
+            catch( System.Exception e)
             {
                 Debug.LogError(e);
             }
@@ -925,7 +921,7 @@ namespace com.asobimo.eternal
             drawArea.y += EditorStyles.objectField.padding.top;
             drawArea.height = EditorGUI.GetPropertyHeight(componentProperty);
 
-            if (bDraw)
+            if(bDraw)
                 EditorGUI.PropertyField(drawArea, componentProperty);
 
             drawArea.y += drawArea.height +
@@ -943,7 +939,7 @@ namespace com.asobimo.eternal
             drawArea.y += EditorStyles.toggle.padding.top;
             drawArea.height = EditorGUI.GetPropertyHeight(componentProperty);
 
-            if (bDraw)
+            if(bDraw)
                 EditorGUI.PropertyField(drawArea, componentProperty);
 
             drawArea.y += drawArea.height +
@@ -960,7 +956,7 @@ namespace com.asobimo.eternal
         {
             drawArea.y += EditorStyles.miniButton.margin.top;
 
-            drawArea.x += EditorStyles.miniButton.margin.left;
+            drawArea.x     += EditorStyles.miniButton.margin.left;
             drawArea.width -= EditorStyles.miniButton.margin.horizontal;
 
             // note: 少し大きくする
@@ -981,9 +977,9 @@ namespace com.asobimo.eternal
         }
         private static float DrawLabel(string text, ref Rect drawArea, bool bDraw = true)
         {
-            var content = new GUIContent(text);
+            var content     = new GUIContent(text);
 
-            drawArea.y += EditorStyles.label.padding.top;
+            drawArea.y     += EditorStyles.label.padding.top;
             drawArea.height = EditorStyles.label.CalcSize(content).y;
 
             if (bDraw)

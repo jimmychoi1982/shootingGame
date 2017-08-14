@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using UnityEngine;
 
-public class MotionBase : MonoBehaviour
+public class MotionBase
 {
     protected AirplaneBase airPlaneBase;
 

@@ -1,17 +1,29 @@
-﻿using UnityEngine;
+﻿using com.jimmychoi.shootingGame.ui.utility;
+using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
     [SerializeField]
-    private Move move;
-    [SerializeField]
     private PlayerAirplane playerAirplane;
+
+    private Move move; // 移动的Action
+
+    private PrefabInstantiater playerAirPlane; // 飞机玩家
 
     private void Start()
     {
-        move = new Move(playerAirplane);
+        move = new Move(playerAirPlane.SafeInstantiateComponent<PlayerAirplane>()); // 生成一个移动Action
     }
+
     void Update()
+    {
+        updateMove();
+    }
+
+    /// <summary>
+    /// 移动
+    /// </summary>
+    private void updateMove()
     {
         // 右・左
         float x = Input.GetAxisRaw("Horizontal");
@@ -23,7 +35,7 @@ public class PlayerController : MonoBehaviour
         Vector2 direction = new Vector2(x, y).normalized;
 
         // 移動の制限
-        if(move != null)
+        if (move != null)
             move.Execute(direction);
     }
 }

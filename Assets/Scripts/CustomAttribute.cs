@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace com.asobimo.eternal
+namespace com.jimmychoi.shootingGame
 {
     /// <summary>
     /// インスペクタへの名前の表示を置き換える
@@ -102,7 +102,7 @@ namespace com.asobimo.eternal
     }
 }
 #if UNITY_EDITOR
-namespace com.asobimo.eternal
+namespace com.jimmychoi.shootingGame
 {
     using UnityEditor;
 
