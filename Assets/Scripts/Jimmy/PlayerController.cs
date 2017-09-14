@@ -63,24 +63,4 @@ public class PlayerController : MonoBehaviour
         if (move != null)
             move.Execute(direction);
     }
-
-    ///// <summary>
-    ///// 不知道为什么死机了
-    ///// </summary>
-    ///// <returns></returns>
-    //IEnumerator startCommonAttack()
-    //{
-    //    while (true)
-    //    {
-    //        if (canFire)
-    //        {
-    //            yield return new WaitForSeconds(playerAirplane.shotDelay);
-
-    //            Debug.Log("commonAttack");
-
-    //            if(commonAttack != null)
-    //                commonAttack.Execute();
-    //        }
-    //    }
-    //}
 }
