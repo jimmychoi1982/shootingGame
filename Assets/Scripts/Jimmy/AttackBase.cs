@@ -17,7 +17,7 @@ namespace com.jimmychoi.shootingGame.AttackSystem
             // 动作开始，具体实现在各个子类中
         }
 
-        public virtual void Init(WeaponBase weapon, AirplaneBase airplaneBase)
+        public virtual void Init(AirplaneBase airplaneBase, params WeaponBase[] weapon)
         {
             // 攻击初期化
         }

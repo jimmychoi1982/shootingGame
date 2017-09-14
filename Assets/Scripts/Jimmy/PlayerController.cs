@@ -26,7 +26,7 @@ public class PlayerController : MonoBehaviour
         move = new Move(playerAirplane); // 生成一个移动Action
         commonBullet = new CommonBullet(commonBulletPool); // 设定武器
 
-        commonAttack.Init(commonBullet, playerAirplane); // 设定攻击模式
+        commonAttack.Init(playerAirplane, commonBullet); // 设定攻击模式
     }
 
     float fireDelay = 0;
@@ -41,7 +41,7 @@ public class PlayerController : MonoBehaviour
         {
             fireDelay = 0;
             if (commonAttack != null)
-                commonAttack.Execute();
+                commonAttack.Execute(CommonAttack.Direction.Up);
         }
     }
 
