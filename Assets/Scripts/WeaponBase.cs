@@ -7,7 +7,7 @@ using com.jimmychoi.shootingGame.ui.utility;
 
 namespace com.jimmychoi.shootingGame.Weapon
 {
-    public class WeaponBase : MonoBehaviour
+    public class WeaponBase
     {
         public PrefabManasablePool bulletPool; // 子弹的pool
     }

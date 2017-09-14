@@ -27,6 +27,7 @@ GameObject:
   - component: {fileID: 82235901117357804}
   - component: {fileID: 114206300431947262}
   - component: {fileID: 114314119281951450}
+  - component: {fileID: 114939427237244484}
   m_Layer: 8
   m_Name: Player_new
   m_TagString: Untagged
@@ -200,16 +201,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b51f113f899debc4dbd8e08e3c3e3e51, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerAirPlanePrefab:
-    m_prefab: {fileID: 1847468859729398}
-    m_parent: {fileID: 0}
-    m_worldPositionStays: 0
-    m_createdInstance: {fileID: 0}
   commonBulletPool:
     m_pool:
-      m_prefab: {fileID: 0}
-      m_parent: {fileID: 0}
+      m_prefab: {fileID: 100002, guid: 7f87fa803597348c9a875419bc6b1abd, type: 2}
+      m_parent: {fileID: 4976083730061882}
       m_worldPositionStays: 0
+  playerAirplane: {fileID: 114314119281951450}
+  canFire: 0
+  commonAttack: {fileID: 114939427237244484}
 --- !u!114 &114314119281951450
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -223,7 +222,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 10
   shotDelay: 0
-  bullet: {fileID: 0}
+  bullet: {fileID: 100002, guid: 7f87fa803597348c9a875419bc6b1abd, type: 2}
   canShot: 0
   explosion: {fileID: 0}
 --- !u!114 &114573257470978588
@@ -232,9 +231,20 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1847468859729398}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5c9db9144c646494e8d93e0a051e844d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &114939427237244484
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1847468859729398}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 01ed6731257196c4eae0d32298fa1633, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!212 &212137000107291510
@@ -277,3 +287,5 @@ SpriteRenderer:
   m_Size: {x: 1, y: 1}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
+  m_WasSpriteAssigned: 1
+  m_MaskInteraction: 0
