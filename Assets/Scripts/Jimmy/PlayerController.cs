@@ -13,6 +13,9 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     private PlayerAirplane playerAirplane; // 主角飞机
 
+    [SerializeField]
+    private Animator animator; // 飞机的动画
+
     public bool canFire = false;
 
     private Move move; // 移动的Action
@@ -27,6 +30,11 @@ public class PlayerController : MonoBehaviour
         commonBullet = new CommonBullet(commonBulletPool); // 设定武器
 
         commonAttack.Init(playerAirplane, commonBullet); // 设定攻击模式
+
+        animator.SetBool("ToRight", false);
+        animator.SetBool("ToLeft", false);
+
+        animator.SetBool("Normal", true);
     }
 
     float fireDelay = 0;
@@ -62,5 +70,38 @@ public class PlayerController : MonoBehaviour
         // 移動の制限
         if (move != null)
             move.Execute(direction);
+
+        Debug.Log(direction);
+
+        updateAnimator(direction);
+    }
+
+    private void updateAnimator(Vector2 direction)
+    {
+        var x = direction.x;
+
+        if(x > 0)
+        {
+            // Right
+            animator.SetBool("Normal", false);
+            animator.SetBool("ToLeft", false);
+
+            animator.SetBool("ToRight", true);
+        }
+        else if(x < 0)
+        {
+            // Left
+            animator.SetBool("Normal", false);
+            animator.SetBool("ToRight", false);
+
+            animator.SetBool("ToLeft", true);
+        }
+        else
+        {
+            animator.SetBool("ToRight", false);
+            animator.SetBool("ToLeft", false);
+
+            animator.SetBool("Normal", true);
+        }
     }
 }
